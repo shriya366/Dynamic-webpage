@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Dynamic Number List</title>
+  <style>
+    body {
+      font-family: Arial;
+      padding: 20px;
+      background-color: #f0f8ff;
+    }
+    input, button {
+      padding: 10px;
+      margin: 5px;
+    }
+    #output {
+      margin-top: 20px;
+      background: #e6f7ff;
+      padding: 15px;
+      border-radius: 10px;
+    }
+  </style>
+</head>
+<body>
+
+  <h2>📊 Dynamic Number List</h2>
+
+  <input type="number" id="numberInput" placeholder="Enter a number">
+  <button onclick="addNumber()">Add</button>
+
+  <div id="output">
+    <p><strong>Numbers:</strong> <span id="numberList">None</span></p>
+    <p><strong>Sum:</strong> <span id="sum">0</span></p>
+    <p><strong>Average:</strong> <span id="average">0</span></p>
+  </div>
+
+  <script>
+    let numbers = [];
+
+    function addNumber() {
+      let input = document.getElementById("numberInput");
+      let value = parseFloat(input.value);
+
+      if (!isNaN(value)) {
+        numbers.push(value);
+        input.value = "";
+        updateDisplay();
+      } else {
+        alert("Please enter a valid number");
+      }
+    }
+
+    function updateDisplay() {
+      document.getElementById("numberList").textContent = numbers.join(", ");
+      document.getElementById("sum").textContent = calculateSum();
+      document.getElementById("average").textContent = calculateAverage().toFixed(2);
+    }
+
+    function calculateSum() {
+      return numbers.reduce((a, b) => a + b, 0);
+    }
+
+    function calculateAverage() {
+      if (numbers.length === 0) return 0;
+      return calculateSum() / numbers.length;
+    }
+  </script>
+
+</body>
+</html>
